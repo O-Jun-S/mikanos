@@ -6,6 +6,7 @@
 #include  <Protocol/SimpleFileSystem.h>
 #include  <Protocol/DiskIo2.h>
 #include  <Protocol/BlockIo.h>
+#include  <Guid/FileInfo.h>
 
 
 // #@@range_begin(memory_map)
