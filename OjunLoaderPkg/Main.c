@@ -83,7 +83,7 @@ EFI_STATUS SaveMemoryMap(struct MemoryMap *map, EFI_FILE_PROTOCOL *file) {
       buf, sizeof(buf),
       "%u, %x, %-ls, %08lx,%lx, %lx\n",
       i, desc->Type, GetMemoryTypeUnicode(desc->Type),
-      desc->PhysicalStart, desc->NumberOfPage, desc->Attribute & 0xffffflu,
+      desc->PhysicalStart, desc->NumberOfPages, desc->Attribute & 0xffffflu
     );
     file->Write(file, &len, buf);
   }
