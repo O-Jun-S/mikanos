@@ -150,7 +150,7 @@ EFI_STATUS EFIAPI UefiMain(
   EFI_FILE_PROTOCOL *kernel_file;
   root_dir->Open(
     root_dir, &kernel_file, L"\\kernel.elf",
-    EFI_FILE_MODULE_READ, 0
+    EFI_FILE_MODE_READ, 0
   );
   UINTN file_info_size = sizeof(EFI_FILE_INFO) + sizeof(CHAR16) * 12;
   UINT8 file_info_buffer[file_info_size];
