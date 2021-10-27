@@ -137,7 +137,13 @@ EFI_STATUS EFIAPI UefiMain(
   EFI_FILE_PROTOCOL* memmap_file;
   root_dir->Open(
     root_dir, &memmap_file, L"\\memmap",
-    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE, 0);
+    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE, 0
+  );
+
+  SaveMemoryMap(&memmap, memmap_file);
+  memmap_file->Close(memmap_file);
+
+  Print(L"I done!!!\n");
 
   while (1);
   return EFI_SUCCESS;
