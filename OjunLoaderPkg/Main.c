@@ -61,8 +61,6 @@ const CHAR16* GetMemoryTypeUnicode(EFI_MEMORY_TYPE type) {
 // #@@range_end(get_memory_type)
 
 // #@@range_start(open_root_dir)
-// #@@range_end(save_memory_map)
-
 EFI_STATUS OpenRootDir(EFI_HANDLE image_handle, EFI_FILE_PROTOCOL** root) {
   EFI_LOADED_IMAGE_PROTOCOL* loaded_image;
   EFI_SIMPLE_FILE_SYSTEM_PROTOCOL* fs;
