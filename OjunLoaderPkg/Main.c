@@ -123,6 +123,7 @@ EFI_STATUS OpenRootDir(EFI_HANDLE image_handle, EFI_FILE_PROTOCOL** root) {
 }
 // #@@range_end(open_root_dir)
 
+// #@@range_start(open_gop)
 EFI_STATUS OpenGOP(EFI_HANDLE image_handle,
                    EFI_GRAPHICS_OUTPUT_PROTOCOL **gop) {
   EFI_STATUS status;
@@ -156,6 +157,7 @@ EFI_STATUS OpenGOP(EFI_HANDLE image_handle,
 
   return EFI_SUCCESS;
 }
+// #@@range_end(open_gop)
 
 // #@@range_start(get_pixel_format_unicode)
 const CHAR16* GetPixelFormatUnicode(EFI_GRAPHICS_PIXEL_FORMAT fmt) {
