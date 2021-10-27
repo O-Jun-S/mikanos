@@ -15,7 +15,7 @@ struct MemoryMap {
   UINTN map_size;
   UINTN map_key;
   UINTN descriptor_size;
-  UINT323 descriptor_version;
+  UINT32 descriptor_version;
 };
 // #@@range_end
 
@@ -123,7 +123,7 @@ EFI_STATUS EFIAPI UefiMain(
     EFI_SYSTEM_TABLE *system_table) {
   Print(L"Hello, Ojun World!\n");
 
-  CHAR8 memmap_buf[1<<12 * 4];
+  CHAR8 memmap_buf[4096 * 4];
   struct MemoryMap memmap = {
     sizeof(memmap_buf),
     memmap_buf,
