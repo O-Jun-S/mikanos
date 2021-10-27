@@ -96,8 +96,8 @@ EFI_STATUS SaveMemoryMap(struct MemoryMap *map, EFI_FILE_PROTOCOL *file) {
 
 // #@@range_start(open_root_dir)
 EFI_STATUS OpenRootDir(EFI_HANDLE image_handle, EFI_FILE_PROTOCOL** root) {
-  EFI_LOADED_IMAGE_PROTOCOL* loaded_image;
-  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL* fs;
+  EFI_LOADED_IMAGE_PROTOCOL *loaded_image;
+  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL *fs;
 
   gBS->OpenProtocol(
       image_handle,
@@ -160,7 +160,7 @@ EFI_STATUS OpenGOP(EFI_HANDLE image_handle,
 // #@@range_end(open_gop)
 
 // #@@range_start(get_pixel_format_unicode)
-const CHAR16* GetPixelFormatUnicode(EFI_GRAPHICS_PIXEL_FORMAT fmt) {
+const CHAR16 *GetPixelFormatUnicode(EFI_GRAPHICS_PIXEL_FORMAT fmt) {
   switch (fmt) {
     case PixelRedGreenBlueReserved8BitPerColor:
       return L"PixelRedGreenBlueReserved8BitPerColor";
@@ -191,10 +191,10 @@ EFI_STATUS EFIAPI UefiMain(
   };
   GetMemoryMap(&memmap);
 
-  EFI_FILE_PROTOCOL* root_dir;
+  EFI_FILE_PROTOCOL *root_dir;
   OpenRootDir(image_handle, &root_dir);
 
-  EFI_FILE_PROTOCOL* memmap_file;
+  EFI_FILE_PROTOCOL *memmap_file;
   root_dir->Open(
     root_dir, &memmap_file, L"\\memmap",
     EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE, 0
