@@ -103,7 +103,8 @@ EFI_STATUS OpenRootDir(EFI_HANDLE image_handle, EFI_FILE_PROTOCOL** root) {
       (VOID**)&loaded_image,
       image_handle,
       NULL,
-      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL);
+      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
+  );
 
   gBS->OpenProtocol(
       loaded_image->DeviceHandle,
@@ -111,7 +112,8 @@ EFI_STATUS OpenRootDir(EFI_HANDLE image_handle, EFI_FILE_PROTOCOL** root) {
       (VOID**)&fs,
       image_handle,
       NULL,
-      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL);
+      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL
+  );
 
   fs->OpenVolume(fs, root);
 
