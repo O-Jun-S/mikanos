@@ -203,7 +203,7 @@ EFI_STATUS EFIAPI UefiMain(
   SaveMemoryMap(&memmap, memmap_file);
   memmap_file->Close(memmap_file);
 
-  // #@@range_start(draw_white)
+  // #@@range_start(gop)
   EFI_GRAPHICS_OUTPUT_PROTOCOL *gop;
   OpenGOP(image_handle, &gop);
   Print(
@@ -220,12 +220,7 @@ EFI_STATUS EFIAPI UefiMain(
     gop->Mode->FrameBufferBase + gop->Mode->FrameBufferSize,
     gop->Mode->FrameBufferSize
   );
-
-  UINT8 *frame_buffer = (UINT8*)gop->Mode->FrameBufferBase;
-  for(UINTN i = 0; i < gop->Mode->FrameBufferSize; i++) {
-    frame_buffer[i] = 200;
-  }
-  // #@@range_end(draw_white)
+  // #@@range_end(gop)
 
   // #@@range_start(load_kernel)
   EFI_FILE_PROTOCOL *kernel_file;
@@ -277,9 +272,9 @@ EFI_STATUS EFIAPI UefiMain(
   // #@@range_start(boot_kernel)
   UINT64 entry_addr = *(UINT64*)(kernel_base_addr + 24);
 
-  typedef void EntryPointType(void);
+  typedef void EntryPointType(UINT64, UINT64);
   EntryPointType *entry_point = (EntryPointType*)entry_addr;
-  entry_point();
+  entry_point(gop->Mode->FrameBufferBase, gop->Mode->FrameBufferSize);
   // #@@range_end(boot_kernel)
 
   Print(L"I done!!!\n");
