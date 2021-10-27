@@ -19,8 +19,8 @@
   UefiApplicationEntryPoint
 
 [Guids]
+
+[Protocols]
   gEfiLoadedImageProtocolGuid
   gEfiLoadFileProtocolGuid
   gEfiSimpleFileSystemProtocolGuid
-
-[Protocols]
