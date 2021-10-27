@@ -28,7 +28,7 @@ EFI_STATUS GetMemoryMap(struct MemoryMap *map) {
   map->map_size = map->buffer_size;
   return gBS->GetMemoryMap(
     &map->map_size,
-    (EFI_MEMORY_DESCRIPTOR*)&map,
+    (EFI_MEMORY_DESCRIPTOR*)&map->buffer,
     &map->map_key,
     &map->descriptor_size,
     &map->descriptor_version
@@ -81,7 +81,7 @@ EFI_STATUS SaveMemoryMap(struct MemoryMap *map, EFI_FILE_PROTOCOL *file) {
     EFI_MEMORY_DESCRIPTOR *desc = (EFI_MEMORY_DESCRIPTOR*)iter;
     len = AsciiSPrint(
       buf, sizeof(buf),
-      "%u, %x, %-ls, %08lx,%lx, %lx\n",
+      "%u, %x, %-ls, %08lx ,%lx, %lx\n",
       i, desc->Type, GetMemoryTypeUnicode(desc->Type),
       desc->PhysicalStart, desc->NumberOfPages, desc->Attribute & 0xffffflu
     );
@@ -126,7 +126,7 @@ EFI_STATUS EFIAPI UefiMain(
     EFI_SYSTEM_TABLE *system_table) {
   Print(L"Hello, Ojun World!\n");
 
-  CHAR8 memmap_buf[4096 * 4];
+  CHAR8 memmap_buf[4096 * 16];
   struct MemoryMap memmap = {
     sizeof(memmap_buf),
     memmap_buf,
