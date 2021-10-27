@@ -126,7 +126,7 @@ EFI_STATUS EFIAPI UefiMain(
     EFI_SYSTEM_TABLE *system_table) {
   Print(L"Hello, Ojun World!\n");
 
-  CHAR8 memmap_buf[4096 * 16];
+  CHAR8 memmap_buf[4096 * 4];
   struct MemoryMap memmap = {
     sizeof(memmap_buf),
     memmap_buf,
