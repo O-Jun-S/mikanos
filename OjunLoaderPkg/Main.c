@@ -11,7 +11,7 @@
 // #@@range_begin(memory_map)
 struct MemoryMap {
   UINTN buffer_size;
-  VOID* buffer;
+  VOID *buffer;
   UINTN map_size;
   UINTN map_key;
   UINTN descriptor_size;
@@ -37,7 +37,7 @@ EFI_STATUS GetMemoryMap(struct MemoryMap *map) {
 // #@@range_end(get_memory_map)
 
 // #@@range_begin(get_memory_type)
-const CHAR16* GetMemoryTypeUnicode(EFI_MEMORY_TYPE type) {
+const CHAR16 *GetMemoryTypeUnicode(EFI_MEMORY_TYPE type) {
   switch (type) {
     case EfiReservedMemoryType: return L"EfiReservedMemoryType";
     case EfiLoaderCode: return L"EfiLoaderCode";
