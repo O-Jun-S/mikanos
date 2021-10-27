@@ -60,6 +60,35 @@ const CHAR16* GetMemoryTypeUnicode(EFI_MEMORY_TYPE type) {
 }
 // #@@range_end(get_memory_type)
 
+// #@@range_start(open_root_dir)
+// #@@range_end(save_memory_map)
+
+EFI_STATUS OpenRootDir(EFI_HANDLE image_handle, EFI_FILE_PROTOCOL** root) {
+  EFI_LOADED_IMAGE_PROTOCOL* loaded_image;
+  EFI_SIMPLE_FILE_SYSTEM_PROTOCOL* fs;
+
+  gBS->OpenProtocol(
+      image_handle,
+      &gEfiLoadedImageProtocolGuid,
+      (VOID**)&loaded_image,
+      image_handle,
+      NULL,
+      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL);
+
+  gBS->OpenProtocol(
+      loaded_image->DeviceHandle,
+      &gEfiSimpleFileSystemProtocolGuid,
+      (VOID**)&fs,
+      image_handle,
+      NULL,
+      EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL);
+
+  fs->OpenVolume(fs, root);
+
+  return EFI_SUCCESS;
+}
+// #@@range_end(open_root_dir)
+
 EFI_STATUS EFIAPI UefiMain(
     EFI_HANDLE image_handle,
     EFI_SYSTEM_TABLE *system_table) {
@@ -70,7 +99,7 @@ EFI_STATUS EFIAPI UefiMain(
     sizeof(memmap_buf),
     memmap_buf,
     0, 0, 0, 0,
-  }
+  };
   GetMemoryMap(&memmap);
 
   EFI_FILE_PROTOCOL* root_dir;
@@ -80,7 +109,7 @@ EFI_STATUS EFIAPI UefiMain(
   root_dir->Open(
     root_dir, &memmap_file, L"\\memmap",
     EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE, 0);
-  )
+  );
 
   while (1);
   return EFI_SUCCESS;
