@@ -31,7 +31,7 @@ EFI_STATUS GetMemoryMap(struct MemoryMap *map) {
     (EFI_MEMORY_DESCRIPTOR*)&map,
     &map->map_key,
     &map->descriptor_size,
-    &map->descriptor_version,
+    &map->descriptor_version
   );
 }
 // #@@range_end(get_memory_map)
