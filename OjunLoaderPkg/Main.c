@@ -60,6 +60,17 @@ const CHAR16* GetMemoryTypeUnicode(EFI_MEMORY_TYPE type) {
 }
 // #@@range_end(get_memory_type)
 
+// #@@range_start(save_memory_map)
+EFI_STATUS SaveMemoryMap(struct Memorymap *map, EFI_FILE_PROTOCOL *file) {
+  CHAR8 buf[256];
+  UINTN len;
+
+  CHAR8 *header = "Index, Type, Type(name), PhysicalStart, NumberOfPage, Attribute\n";
+  len = AsciiStrLen(header);
+  file->(file, &len, header);
+}
+// #@@range_end(save_memory_map)
+
 // #@@range_start(open_root_dir)
 EFI_STATUS OpenRootDir(EFI_HANDLE image_handle, EFI_FILE_PROTOCOL** root) {
   EFI_LOADED_IMAGE_PROTOCOL* loaded_image;
