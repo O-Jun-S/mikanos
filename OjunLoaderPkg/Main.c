@@ -178,6 +178,12 @@ const CHAR16 *GetPixelFormatUnicode(EFI_GRAPHICS_PIXEL_FORMAT fmt) {
 }
 // #@@range_end(get_pixel_format_unicode)
 
+// #@@range_start(halt)
+void Halt(void) {
+  while(1) __asm__("hlt");
+}
+// #@@range_end(halt)
+
 EFI_STATUS EFIAPI UefiMain(
     EFI_HANDLE image_handle,
     EFI_SYSTEM_TABLE *system_table) {
@@ -242,6 +248,10 @@ EFI_STATUS EFIAPI UefiMain(
     AllocateAddress, EfiLoaderData,
     (kernel_file_size + 0xfff) / 0x1000, &kernel_base_addr
   );
+  if(EFI_ERROR(status)) {
+    Print(L"Failed to allocate pages: %r", status);
+    Halt();
+  }
 
   kernel_file->Read(
     kernel_file,
