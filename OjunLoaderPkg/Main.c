@@ -73,6 +73,15 @@ EFI_STATUS EFIAPI UefiMain(
   }
   GetMemoryMap(&memmap);
 
+  EFI_FILE_PROTOCOL* root_dir;
+  OpenRootDir(image_handle, &root_dir);
+
+  EFI_FILE_PROTOCOL* memmap_file;
+  root_dir->Open(
+    root_dir, &memmap_file, L"\\memmap",
+    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE, 0);
+  )
+
   while (1);
   return EFI_SUCCESS;
 }
