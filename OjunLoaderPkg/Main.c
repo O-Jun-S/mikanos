@@ -138,7 +138,6 @@ EFI_STATUS EFIAPI UefiMain(
   root_dir->Open(
     root_dir, &memmap_file, L"\\memmap",
     EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE, 0);
-  );
 
   while (1);
   return EFI_SUCCESS;
