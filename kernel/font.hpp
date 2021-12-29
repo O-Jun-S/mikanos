@@ -1,3 +1,5 @@
+#pragma once
+
 #include"graphics.hpp"
 #include<cstdint>
 

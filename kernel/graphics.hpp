@@ -1,3 +1,5 @@
+#pragma once
+
 #include<cstddef>
 #include"frame_buffer_config.hpp"
 
