@@ -207,10 +207,14 @@ void CopyLoadSegments(Elf64_Ehdr *ehdr) {
 
     UINT64 segm_in_file = (UINT64)ehdr + phdr[i].p_offset;
     // p_vaddr -> 最終目的地
-    CopyMem((VOID*)phdr[i].p_vaddr, (VOID*)segm_in_file, phdr[i].p_filesz);
+    // CopyMem UEFI 2021 P.304
+    // CopyMem(*dst, *src, len)
+    // 本にはgBSがなかったが、edk2コンパイラから
+    // CopyMem及びSetMemが見つからなかったため、gBSをつけた。
+    gBS->CopyMem((VOID*)phdr[i].p_vaddr, (VOID*)segm_in_file, phdr[i].p_filesz);
 
     UINTN remain_bytes = phdr[i].p_memsz - phdr[i].p_filesz;
-    SetMem((VOID*)(phdr[i].p_vaddr + phdr[i].p_filesz), remain_bytes, 0);
+    gBS->SetMem((VOID*)(phdr[i].p_vaddr + phdr[i].p_filesz), remain_bytes, 0);
   }
 }
 
