@@ -1,3 +1,8 @@
+/**
+ * @file main.cpp
+ * @brief カーネルのメイン処理を書いたファイル
+ */
+
 #include<cstdint>
 #include <cstddef>
 #include"frame_buffer_config.hpp"
