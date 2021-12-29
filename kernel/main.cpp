@@ -37,12 +37,18 @@ int WritePixel(
 }
 
 extern "C" void KernelMain(
-    uint64_t frame_buffer_base,
-    uint64_t frame_buffer_size
+    FrameBufferConfig& frame_buffer_config
 ) {
-    uint8_t *frame_buffer = reinterpret_cast<uint8_t*>(frame_buffer_base);
-    for(uint64_t i = 0; i < frame_buffer_size; i++) {
-        frame_buffer[i] = i % 256;
+    for(int x=0; x<frame_buffer_config.horizontal_resolution; x++) {
+        for(int y=0; y<frame_buffer_config.vertical_resolution; y++) {
+            WritePixel(frame_buffer_config, x, y, {255, 255, 255});
+        }
+
+        for(int x=0; x<200; x++) {
+            for(int y=0; y<100; y++) {
+                WritePixel(frame_buffer_config, 100+x, 100+y, {0, 100, 100});
+            }
+        }
     }
     while(1) __asm__("hlt");
 }
