@@ -3,8 +3,7 @@
  * @brief カーネルのメイン処理を書いたファイル
  */
 
-#include<cstdint>
-#include <cstddef>
+#include<cstddef>
 #include"graphics.hpp"
 
 // #@@range_begin(font_a)
